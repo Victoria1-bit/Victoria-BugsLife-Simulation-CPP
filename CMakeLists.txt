@@ -4,4 +4,7 @@ add_executable(BugsLife_Simulation_CPP
         Crawler.cpp
         Hopper.cpp
         Hopper.h
+        Board.h
+        Board.cpp
+
 )
