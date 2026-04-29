@@ -4,7 +4,7 @@
 #include <list>
 #include <utility>
 
-// Direction enum (simple and clear)
+// Direction enum
 enum Direction { NORTH = 1, EAST, SOUTH, WEST };
 
 class Bug {
@@ -14,13 +14,15 @@ protected:
     Direction direction;
     int health;
     bool alive;
-    std::list<std::pair<int,int>> path;
+
+    // FIX: added space between > >
+    std::list<std::pair<int,int> > path;
 
 public:
     // Constructor
     Bug(int id, int x, int y, Direction dir, int health);
 
-    // Pure virtual function (makes class abstract)
+    // Pure virtual function
     virtual void move() = 0;
 
     // Getters
@@ -28,10 +30,10 @@ public:
     int getId() const;
     std::pair<int,int> getPosition() const;
 
-    // Check if bug is blocked by edge
+    // Check if blocked
     bool isWayBlocked();
 
-    // Display bug info
+    // Display
     virtual void display() const;
 
     // Destructor
