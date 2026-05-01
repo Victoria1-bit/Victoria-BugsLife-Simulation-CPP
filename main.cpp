@@ -1,32 +1,31 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "Board.h"
 
 using namespace std;
 
 int main() {
 
-    // Starting message
+    srand(time(0));
+
     cout << "Bug Board Test" << endl;
 
-    // Create board object
     Board board;
 
-    // Load bugs from file
     board.loadBugsFromFile("bugs.txt");
 
     cout << "\nAll Bugs Before Tap:" << endl;
-
-    // Display all bugs before movement
     board.displayAllBugs();
 
-    cout << "\nTapping board..." << endl;
+    // NEW
+    cout << "\nTurning bugs..." << endl;
+    board.turnBugs();
 
-    // Move all bugs once
+    cout << "\nTapping board..." << endl;
     board.tapBoard();
 
     cout << "\nAll Bugs After Tap:" << endl;
-
-    // Display all bugs after movement
     board.displayAllBugs();
 
     return 0;
