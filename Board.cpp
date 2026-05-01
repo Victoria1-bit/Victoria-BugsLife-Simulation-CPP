@@ -18,7 +18,6 @@ void Board::loadBugsFromFile(const std::string& filename) {
 
     std::string line;
 
-    // Read each bug record line by line
     while (getline(file, line)) {
         std::stringstream ss(line);
         std::string type;
@@ -48,12 +47,9 @@ void Board::loadBugsFromFile(const std::string& filename) {
         getline(ss, value, ';');
         health = stoi(value);
 
-        // C means Crawler
         if (type == "C") {
             bugs.push_back(new Crawler(id, x, y, (Direction)dir, health));
         }
-
-        // H means Hopper
         else if (type == "H") {
             getline(ss, value, ';');
             hopLength = stoi(value);
@@ -85,15 +81,40 @@ void Board::findBug(int id) const {
 // Move all bugs once
 void Board::tapBoard() {
     for (auto bug : bugs) {
-        bug->move();
+        if (bug->isAlive()) {
+            bug->move();
+        }
     }
 }
 
 // Randomly turn all bugs
 void Board::turnBugs() {
     for (auto bug : bugs) {
-        int newDirection = rand() % 4 + 1;
-        bug->setDirection((Direction)newDirection);
+        if (bug->isAlive()) {
+            int newDirection = rand() % 4 + 1;
+            bug->setDirection((Direction)newDirection);
+        }
+    }
+}
+
+// Simple fight system
+// If two alive bugs are on the same cell, the bug with lower health dies
+void Board::fightBugs() {
+    for (int i = 0; i < bugs.size(); i++) {
+        for (int j = i + 1; j < bugs.size(); j++) {
+
+            if (bugs[i]->isAlive() && bugs[j]->isAlive()) {
+                if (bugs[i]->getPosition() == bugs[j]->getPosition()) {
+
+                    if (bugs[i]->getHealth() > bugs[j]->getHealth()) {
+                        bugs[j]->kill();
+                    }
+                    else if (bugs[j]->getHealth() > bugs[i]->getHealth()) {
+                        bugs[i]->kill();
+                    }
+                }
+            }
+        }
     }
 }
 

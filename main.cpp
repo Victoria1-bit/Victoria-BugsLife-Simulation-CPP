@@ -24,10 +24,12 @@ int main() {
     cout << "\nTapping board..." << endl;
     board.tapBoard();
 
+    cout << "\nChecking for fights..." << endl;
+    board.fightBugs();
+
     cout << "\nAll Bugs After Tap:" << endl;
     board.displayAllBugs();
 
-    // NEW LINE (small improvement)
     cout << "\n--- Simulation Step Complete ---" << endl;
 
     return 0;

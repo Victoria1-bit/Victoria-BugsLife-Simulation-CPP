@@ -16,6 +16,9 @@ public:
     void tapBoard();
     void turnBugs();
 
+    // Checks if bugs landed on the same cell
+    void fightBugs();
+
     ~Board();
 };
 
