@@ -8,17 +8,26 @@ int main() {
     // Starting message
     cout << "Bug Board Test" << endl;
 
-    // Create the Board object (this will hold all bugs)
+    // Create board object
     Board board;
 
-    // Load bugs from the text file
-    // The file will be copied automatically into the build folder by CMake
+    // Load bugs from file
     board.loadBugsFromFile("bugs.txt");
 
-    cout << "\nAll Bugs:" << endl;
+    cout << "\nAll Bugs Before Tap:" << endl;
 
-    // Display all bugs currently on the board
+    // Display all bugs before movement
+    board.displayAllBugs();
+
+    cout << "\nTapping board..." << endl;
+
+    // Move all bugs once
+    board.tapBoard();
+
+    cout << "\nAll Bugs After Tap:" << endl;
+
+    // Display all bugs after movement
     board.displayAllBugs();
 
     return 0;
-}gi
+}
