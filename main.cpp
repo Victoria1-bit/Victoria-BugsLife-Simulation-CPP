@@ -13,7 +13,6 @@ int main() {
 
     Board board;
 
-    // Load bugs from file
     board.loadBugsFromFile("bugs.txt");
 
     cout << "\nAll Bugs Before Tap:" << endl;
@@ -27,6 +26,9 @@ int main() {
 
     cout << "\nAll Bugs After Tap:" << endl;
     board.displayAllBugs();
+
+    // NEW LINE (small improvement)
+    cout << "\n--- Simulation Step Complete ---" << endl;
 
     return 0;
 }
