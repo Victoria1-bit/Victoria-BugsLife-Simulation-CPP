@@ -1,95 +1,65 @@
 #include "Board.h"
 #include "Crawler.h"
 #include "Hopper.h"
-
 #include <fstream>
 #include <sstream>
-#include <iostream>
+#include <cstdlib>
 
-// Load bugs from a text file
-void Board::loadBugsFromFile(const std::string& filename) {
-    std::ifstream file(filename);
+void Board::loadBugsFromFile(const string& filename) {
+    ifstream file(filename);
 
     if (!file) {
-        std::cout << "Error opening file" << std::endl;
+        cout << "Error opening file" << endl;
         return;
     }
 
-    std::string line;
+    string line;
 
-    // Read the file one line at a time
     while (getline(file, line)) {
-        std::stringstream ss(line);
-        std::string type;
+        stringstream ss(line);
+        string type;
 
-        getline(ss, type, ';');
+        getline(ss, type, ',');
 
-        int id;
-        int x;
-        int y;
-        int dir;
-        int health;
-        int hop;
+        int id, x, y, dir, health, hop;
 
-        getline(ss, line, ';');
-        id = stoi(line);
+        ss >> id;
+        ss.ignore();
+        ss >> x;
+        ss.ignore();
+        ss >> y;
+        ss.ignore();
+        ss >> dir;
+        ss.ignore();
+        ss >> health;
 
-        getline(ss, line, ';');
-        x = stoi(line);
-
-        getline(ss, line, ';');
-        y = stoi(line);
-
-        getline(ss, line, ';');
-        dir = stoi(line);
-
-        getline(ss, line, ';');
-        health = stoi(line);
-
-        // Create a Crawler if type is C
-        if (type == "C") {
+        if (type == "Crawler") {
             bugs.push_back(new Crawler(id, x, y, (Direction)dir, health));
         }
-
-        // Create a Hopper if type is H
-        else if (type == "H") {
-            getline(ss, line, ';');
-            hop = stoi(line);
-
+        else if (type == "Hopper") {
+            ss.ignore();
+            ss >> hop;
             bugs.push_back(new Hopper(id, x, y, (Direction)dir, health, hop));
         }
     }
 }
 
-// Display every bug on the board
 void Board::displayAllBugs() const {
     for (auto bug : bugs) {
         bug->display();
     }
 }
 
-// Search for a bug by ID
-void Board::findBug(int id) const {
-    for (auto bug : bugs) {
-        if (bug->getId() == id) {
-            bug->display();
-            return;
-        }
-    }
-
-    std::cout << "Bug " << id << " not found" << std::endl;
-}
-
-// Move all bugs once
 void Board::tapBoard() {
     for (auto bug : bugs) {
         bug->move();
     }
 }
 
-// Delete all bugs from memory
-Board::~Board() {
+// NEW
+void Board::turnBugs() {
     for (auto bug : bugs) {
-        delete bug;
+        int newDir = rand() % 4 + 1;
+        bug->setDirection((Direction)newDir);
     }
 }

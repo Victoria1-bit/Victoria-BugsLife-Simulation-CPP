@@ -1,42 +1,40 @@
 #ifndef BUG_H
 #define BUG_H
 
+#include <iostream>
 #include <list>
 #include <utility>
 
-// Direction enum
+using namespace std;
+
+// Direction enum (1–4)
 enum Direction { NORTH = 1, EAST, SOUTH, WEST };
 
 class Bug {
 protected:
     int id;
-    std::pair<int,int> position;
+    pair<int,int> position;
     Direction direction;
     int health;
     bool alive;
 
-    // FIX: added space between > >
-    std::list<std::pair<int,int> > path;
+    list<pair<int,int>> path;
 
 public:
-    // Constructor
     Bug(int id, int x, int y, Direction dir, int health);
 
-    // Pure virtual function
     virtual void move() = 0;
-
-    // Getters
-    bool isAlive() const;
-    int getId() const;
-    std::pair<int,int> getPosition() const;
-
-    // Check if blocked
-    bool isWayBlocked();
-
-    // Display
     virtual void display() const;
 
-    // Destructor
+    bool isAlive() const;
+    int getId() const;
+    pair<int,int> getPosition() const;
+
+    bool isWayBlocked();
+
+    // NEW: allows Board to change direction
+    void setDirection(Direction dir);
+
     virtual ~Bug();
 };
 

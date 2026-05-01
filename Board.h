@@ -2,29 +2,22 @@
 #define BOARD_H
 
 #include <vector>
-#include <string>
 #include "Bug.h"
+
+using namespace std;
 
 class Board {
 private:
-    // Vector stores pointers to all bugs
-    std::vector<Bug*> bugs;
+    vector<Bug*> bugs;
 
 public:
-    // Load bugs from bugs.txt file
-    void loadBugsFromFile(const std::string& filename);
-
-    // Display all bugs
+    void loadBugsFromFile(const string& filename);
     void displayAllBugs() const;
 
-    // Find one bug by ID
-    void findBug(int id) const;
-
-    // Move all bugs once
     void tapBoard();
 
-    // Destructor clears heap memory
-    ~Board();
+    // NEW
+    void turnBugs();
 };
 
 #endif
