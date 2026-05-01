@@ -5,17 +5,19 @@ using namespace std;
 
 int main() {
 
+    // Starting message
     cout << "Bug Board Test" << endl;
 
-    // Create board object
+    // Create the Board object (this will hold all bugs)
     Board board;
 
-    // Load bugs from file (FIXED PATH)
-    board.loadBugsFromFile("../bugs.txt");
+    // Load bugs from the text file
+    // The file will be copied automatically into the build folder by CMake
+    board.loadBugsFromFile("bugs.txt");
 
     cout << "\nAll Bugs:" << endl;
 
-    // Display all bugs
+    // Display all bugs currently on the board
     board.displayAllBugs();
 
     return 0;
