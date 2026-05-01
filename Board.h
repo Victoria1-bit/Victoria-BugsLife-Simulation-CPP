@@ -2,22 +2,21 @@
 #define BOARD_H
 
 #include <vector>
+#include <string>
 #include "Bug.h"
-
-using namespace std;
 
 class Board {
 private:
-    vector<Bug*> bugs;
+    std::vector<Bug*> bugs;
 
 public:
-    void loadBugsFromFile(const string& filename);
+    void loadBugsFromFile(const std::string& filename);
     void displayAllBugs() const;
-
+    void findBug(int id) const;
     void tapBoard();
-
-    // NEW
     void turnBugs();
+
+    ~Board();
 };
 
 #endif

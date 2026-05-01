@@ -13,12 +13,12 @@ int main() {
 
     Board board;
 
+    // Load bugs from file
     board.loadBugsFromFile("bugs.txt");
 
     cout << "\nAll Bugs Before Tap:" << endl;
     board.displayAllBugs();
 
-    // NEW
     cout << "\nTurning bugs..." << endl;
     board.turnBugs();
 
