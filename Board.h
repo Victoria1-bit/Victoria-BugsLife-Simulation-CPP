@@ -18,9 +18,10 @@ public:
     void findBug(int id);
 
     void displayLifeHistory() const;
+    void displayAllCells() const;
 
     // NEW
-    void displayAllCells() const;
+    void runSimulation();
 
     ~Board();
 };

@@ -6,6 +6,9 @@
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
+#include <utility>
 
 void Board::loadBugsFromFile(const std::string& filename) {
     std::ifstream file(filename);
@@ -36,7 +39,8 @@ void Board::loadBugsFromFile(const std::string& filename) {
             bugs.push_back(new Crawler(id, x, y, (Direction)dir, health));
         }
         else if (type == "H") {
-            getline(ss, value, ';'); hop = stoi(value);
+            getline(ss, value, ';');
+            hop = stoi(value);
             bugs.push_back(new Hopper(id, x, y, (Direction)dir, health, hop));
         }
     }
@@ -50,7 +54,9 @@ void Board::displayAllBugs() const {
 
 void Board::tapBoard() {
     for (auto bug : bugs) {
-        if (bug->isAlive()) bug->move();
+        if (bug->isAlive()) {
+            bug->move();
+        }
     }
 }
 
@@ -66,10 +72,8 @@ void Board::turnBugs() {
 void Board::fightBugs() {
     for (int i = 0; i < bugs.size(); i++) {
         for (int j = i + 1; j < bugs.size(); j++) {
-
             if (bugs[i]->isAlive() && bugs[j]->isAlive()) {
                 if (bugs[i]->getPosition() == bugs[j]->getPosition()) {
-
                     if (bugs[i]->getHealth() > bugs[j]->getHealth()) {
                         bugs[j]->kill();
                     }
@@ -89,10 +93,10 @@ void Board::findBug(int id) {
             return;
         }
     }
+
     std::cout << "Bug not found." << std::endl;
 }
 
-// NEW (life history)
 void Board::displayLifeHistory() const {
     for (auto bug : bugs) {
         std::cout << "Bug " << bug->getId() << " path: ";
@@ -105,17 +109,9 @@ void Board::displayLifeHistory() const {
     }
 }
 
-Board::~Board() {
-    for (auto bug : bugs) {
-        delete bug;
-    }
-}
-// Display all cells and bugs in each
 void Board::displayAllCells() const {
-
     for (int y = 0; y < 10; y++) {
         for (int x = 0; x < 10; x++) {
-
             std::cout << "(" << x << "," << y << "): ";
 
             bool found = false;
@@ -133,5 +129,38 @@ void Board::displayAllCells() const {
 
             std::cout << std::endl;
         }
+    }
+}
+
+void Board::runSimulation() {
+    std::cout << "\n--- Running Simulation ---" << std::endl;
+
+    while (true) {
+        int aliveCount = 0;
+
+        for (auto bug : bugs) {
+            if (bug->isAlive()) {
+                aliveCount++;
+            }
+        }
+
+        if (aliveCount <= 1) {
+            std::cout << "\nSimulation Complete!" << std::endl;
+            break;
+        }
+
+        turnBugs();
+        tapBoard();
+        fightBugs();
+
+        displayAllBugs();
+
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
+Board::~Board() {
+    for (auto bug : bugs) {
+        delete bug;
     }
 }

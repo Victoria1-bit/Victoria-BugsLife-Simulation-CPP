@@ -62,6 +62,10 @@ int main() {
                 board.displayAllCells();
                 break;
 
+            case 7:
+                board.runSimulation();
+                break;
+
 
             case 8:
                 cout << "Exiting..." << endl;
