@@ -27,7 +27,7 @@ int main() {
 
     Board board;
 
-    // Initial demo run (your existing logic)
+    // Initial demo run
     board.loadBugsFromFile("bugs.txt");
 
     cout << "\nAll Bugs Before Tap:" << endl;
@@ -55,13 +55,16 @@ int main() {
         cin >> choice;
 
         switch (choice) {
+
             case 1:
-                cout << "Initialize selected" << endl;
+                cout << "\nInitializing Bug Board..." << endl;
+                board.loadBugsFromFile("bugs.txt");  // reloads file
+                cout << "Board loaded!" << endl;
                 break;
 
             case 2:
                 cout << "\nAll Bugs:" << endl;
-                board.displayAllBugs();   // REAL FUNCTION CONNECTED
+                board.displayAllBugs();
                 break;
 
             case 3:
