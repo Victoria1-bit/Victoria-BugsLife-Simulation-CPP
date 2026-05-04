@@ -4,6 +4,7 @@
 #include <iostream>
 #include <list>
 #include <utility>
+#include <string>
 
 enum Direction { NORTH = 1, EAST, SOUTH, WEST };
 
@@ -27,8 +28,6 @@ public:
     int getId() const;
     int getHealth() const;
     std::pair<int,int> getPosition() const;
-
-    // NEW (for life history)
     std::list<std::pair<int,int> > getPath() const;
 
     bool isWayBlocked();
