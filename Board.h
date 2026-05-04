@@ -12,12 +12,13 @@ private:
 public:
     void loadBugsFromFile(const std::string& filename);
     void displayAllBugs() const;
-    void findBug(int id) const;
     void tapBoard();
     void turnBugs();
-
-    // Checks if bugs landed on the same cell
     void fightBugs();
+    void findBug(int id);
+
+    // NEW
+    void displayLifeHistory() const;
 
     ~Board();
 };

@@ -7,7 +7,6 @@
 #include <iostream>
 #include <cstdlib>
 
-// Load bugs from bugs.txt
 void Board::loadBugsFromFile(const std::string& filename) {
     std::ifstream file(filename);
 
@@ -23,82 +22,47 @@ void Board::loadBugsFromFile(const std::string& filename) {
         std::string type;
         std::string value;
 
-        int id;
-        int x;
-        int y;
-        int dir;
-        int health;
-        int hopLength;
+        int id, x, y, dir, health, hop;
 
         getline(ss, type, ';');
 
-        getline(ss, value, ';');
-        id = stoi(value);
-
-        getline(ss, value, ';');
-        x = stoi(value);
-
-        getline(ss, value, ';');
-        y = stoi(value);
-
-        getline(ss, value, ';');
-        dir = stoi(value);
-
-        getline(ss, value, ';');
-        health = stoi(value);
+        getline(ss, value, ';'); id = stoi(value);
+        getline(ss, value, ';'); x = stoi(value);
+        getline(ss, value, ';'); y = stoi(value);
+        getline(ss, value, ';'); dir = stoi(value);
+        getline(ss, value, ';'); health = stoi(value);
 
         if (type == "C") {
             bugs.push_back(new Crawler(id, x, y, (Direction)dir, health));
         }
         else if (type == "H") {
-            getline(ss, value, ';');
-            hopLength = stoi(value);
-
-            bugs.push_back(new Hopper(id, x, y, (Direction)dir, health, hopLength));
+            getline(ss, value, ';'); hop = stoi(value);
+            bugs.push_back(new Hopper(id, x, y, (Direction)dir, health, hop));
         }
     }
 }
 
-// Display every bug
 void Board::displayAllBugs() const {
     for (auto bug : bugs) {
         bug->display();
     }
 }
 
-// Find one bug by ID
-void Board::findBug(int id) const {
-    for (auto bug : bugs) {
-        if (bug->getId() == id) {
-            bug->display();
-            return;
-        }
-    }
-
-    std::cout << "Bug " << id << " not found" << std::endl;
-}
-
-// Move all bugs once
 void Board::tapBoard() {
     for (auto bug : bugs) {
-        if (bug->isAlive()) {
-            bug->move();
-        }
+        if (bug->isAlive()) bug->move();
     }
 }
 
-// Randomly turn all bugs
 void Board::turnBugs() {
     for (auto bug : bugs) {
         if (bug->isAlive()) {
-            int newDirection = rand() % 4 + 1;
-            bug->setDirection((Direction)newDirection);
+            int dir = rand() % 4 + 1;
+            bug->setDirection((Direction)dir);
         }
     }
 }
 
-// Simple fight system
-// If two alive bugs are on the same cell, the bug with lower health dies
 void Board::fightBugs() {
     for (int i = 0; i < bugs.size(); i++) {
         for (int j = i + 1; j < bugs.size(); j++) {
@@ -118,7 +82,29 @@ void Board::fightBugs() {
     }
 }
 
-// Delete heap memory
+void Board::findBug(int id) {
+    for (auto bug : bugs) {
+        if (bug->getId() == id) {
+            bug->display();
+            return;
+        }
+    }
+    std::cout << "Bug not found." << std::endl;
+}
+
+// NEW (life history)
+void Board::displayLifeHistory() const {
+    for (auto bug : bugs) {
+        std::cout << "Bug " << bug->getId() << " path: ";
+
+        for (auto pos : bug->getPath()) {
+            std::cout << "(" << pos.first << "," << pos.second << ") ";
+        }
+
+        std::cout << std::endl;
+    }
+}
+
 Board::~Board() {
     for (auto bug : bugs) {
         delete bug;

@@ -28,11 +28,12 @@ public:
     int getHealth() const;
     std::pair<int,int> getPosition() const;
 
+    // NEW (for life history)
+    std::list<std::pair<int,int> > getPath() const;
+
     bool isWayBlocked();
 
     void setDirection(Direction dir);
-
-    // Used later when bugs fight
     void kill();
 
     virtual ~Bug();
