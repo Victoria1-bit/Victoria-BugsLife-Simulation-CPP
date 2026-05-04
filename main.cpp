@@ -21,7 +21,8 @@ void displayMenu() {
 
 int main() {
 
-    srand(time(0));
+    // BETTER RANDOM SEED (Commit 37)
+    srand(static_cast<unsigned>(time(0)));
 
     Board board;
     board.loadBugsFromFile("bugs.txt");
@@ -36,41 +37,35 @@ int main() {
             case 1:
                 cout << "\nInitializing Bug Board..." << endl;
                 board.loadBugsFromFile("bugs.txt");
-                cout << "Bug Board loaded successfully." << endl;
                 break;
 
             case 2:
-                cout << "\n--- All Bugs ---" << endl;
                 board.displayAllBugs();
                 board.displayBugCount();
                 break;
 
             case 3: {
                 int id;
-                cout << "Enter Bug ID to search for: ";
+                cout << "Enter Bug ID: ";
                 cin >> id;
                 board.findBug(id);
                 break;
             }
 
             case 4:
-                cout << "\n--- Tapping Bug Board ---" << endl;
                 board.turnBugs();
                 board.tapBoard();
                 board.fightBugs();
-                cout << "Tap complete." << endl;
                 board.displayAllBugs();
                 board.displayBugCount();
                 break;
 
             case 5:
-                cout << "\n--- Life History ---" << endl;
                 board.displayLifeHistory();
                 board.saveLifeHistoryToFile("life_history.txt");
                 break;
 
             case 6:
-                cout << "\n--- All Cells ---" << endl;
                 board.displayAllCells();
                 break;
 
@@ -79,11 +74,11 @@ int main() {
                 break;
 
             case 8:
-                cout << "Exiting program..." << endl;
+                cout << "Exiting..." << endl;
                 break;
 
             default:
-                cout << "Invalid choice. Please enter a number from 1 to 8." << endl;
+                cout << "Invalid choice" << endl;
         }
 
     } while (choice != 8);
