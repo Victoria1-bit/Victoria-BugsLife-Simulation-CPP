@@ -53,6 +53,19 @@ void Board::displayAllBugs() const {
     }
 }
 
+void Board::displayBugCount() const {
+    int alive = 0;
+    int total = bugs.size();
+
+    for (auto bug : bugs) {
+        if (bug->isAlive()) alive++;
+    }
+
+    std::cout << "\nTotal Bugs: " << total
+              << " | Alive: " << alive
+              << " | Dead: " << (total - alive) << std::endl;
+}
+
 void Board::tapBoard() {
     for (auto bug : bugs) {
         if (bug->isAlive()) {
@@ -153,14 +166,12 @@ void Board::runSimulation() {
         int aliveCount = 0;
 
         for (auto bug : bugs) {
-            if (bug->isAlive()) {
-                aliveCount++;
-            }
+            if (bug->isAlive()) aliveCount++;
         }
 
         if (aliveCount <= 1) {
             std::cout << "\nSimulation Complete!" << std::endl;
-            displayWinner(); // NEW
+            displayWinner();
             break;
         }
 
@@ -173,6 +184,7 @@ void Board::runSimulation() {
         fightBugs();
 
         displayAllBugs();
+        displayBugCount(); // NEW
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -181,7 +193,6 @@ void Board::runSimulation() {
 }
 
 void Board::saveLifeHistoryToFile(const std::string& filename) const {
-
     std::time_t now = std::time(0);
     std::tm* ltm = std::localtime(&now);
 

@@ -22,8 +22,10 @@ public:
     void runSimulation();
     void saveLifeHistoryToFile(const std::string& filename) const;
 
-    // NEW
     void displayWinner() const;
+
+
+    void displayBugCount() const;
 
     ~Board();
 };
