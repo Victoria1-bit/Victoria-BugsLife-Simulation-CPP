@@ -12,6 +12,13 @@
 #include <ctime>
 
 void Board::loadBugsFromFile(const std::string& filename) {
+
+    // 🔥 FIX (Commit 39): clear existing bugs first
+    for (auto bug : bugs) {
+        delete bug;
+    }
+    bugs.clear();
+
     std::ifstream file(filename);
 
     if (!file) {
@@ -68,9 +75,7 @@ void Board::displayBugCount() const {
 
 void Board::tapBoard() {
     for (auto bug : bugs) {
-        if (bug->isAlive()) {
-            bug->move();
-        }
+        if (bug->isAlive()) bug->move();
     }
 }
 
@@ -90,8 +95,7 @@ void Board::fightBugs() {
                 if (bugs[i]->getPosition() == bugs[j]->getPosition()) {
                     if (bugs[i]->getHealth() > bugs[j]->getHealth()) {
                         bugs[j]->kill();
-                    }
-                    else if (bugs[j]->getHealth() > bugs[i]->getHealth()) {
+                    } else if (bugs[j]->getHealth() > bugs[i]->getHealth()) {
                         bugs[i]->kill();
                     }
                 }
@@ -113,11 +117,9 @@ void Board::findBug(int id) {
 void Board::displayLifeHistory() const {
     for (auto bug : bugs) {
         std::cout << "Bug " << bug->getId() << " path: ";
-
         for (auto pos : bug->getPath()) {
             std::cout << "(" << pos.first << "," << pos.second << ") ";
         }
-
         std::cout << std::endl;
     }
 }
@@ -125,11 +127,9 @@ void Board::displayLifeHistory() const {
 void Board::displayAllCells() const {
     for (int y = 0; y < 10; y++) {
         for (int x = 0; x < 10; x++) {
-
             std::cout << "(" << x << "," << y << "): ";
 
             bool found = false;
-
             for (auto bug : bugs) {
                 if (bug->isAlive() && bug->getPosition() == std::make_pair(x, y)) {
                     std::cout << "Bug " << bug->getId() << " ";
@@ -137,9 +137,7 @@ void Board::displayAllCells() const {
                 }
             }
 
-            if (!found) {
-                std::cout << "empty";
-            }
+            if (!found) std::cout << "empty";
 
             std::cout << std::endl;
         }
@@ -164,7 +162,6 @@ void Board::runSimulation() {
     while (tapCount < 20) {
 
         int aliveCount = 0;
-
         for (auto bug : bugs) {
             if (bug->isAlive()) aliveCount++;
         }
@@ -184,7 +181,7 @@ void Board::runSimulation() {
         fightBugs();
 
         displayAllBugs();
-        displayBugCount(); // NEW
+        displayBugCount();
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -210,11 +207,9 @@ void Board::saveLifeHistoryToFile(const std::string& filename) const {
 
     for (auto bug : bugs) {
         outFile << "Bug " << bug->getId() << " path: ";
-
         for (auto pos : bug->getPath()) {
             outFile << "(" << pos.first << "," << pos.second << ") ";
         }
-
         outFile << std::endl;
     }
 
