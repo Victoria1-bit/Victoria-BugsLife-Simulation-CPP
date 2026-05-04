@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Menu display function (NEW)
+// Menu display
 void displayMenu() {
     cout << "\n========== BUG BOARD MENU ==========" << endl;
     cout << "1. Initialize Bug Board" << endl;
@@ -27,34 +27,64 @@ int main() {
 
     Board board;
 
-    // Load bugs from file
+    // Initial demo run (your existing logic)
     board.loadBugsFromFile("bugs.txt");
 
-    // BEFORE
     cout << "\nAll Bugs Before Tap:" << endl;
     board.displayAllBugs();
 
-    // TURN
     cout << "\nTurning bugs..." << endl;
     board.turnBugs();
 
-    // MOVE
     cout << "\nTapping board..." << endl;
     board.tapBoard();
 
-    // FIGHT
     cout << "\nChecking for fights..." << endl;
     board.fightBugs();
 
-    // AFTER
     cout << "\nAll Bugs After Tap:" << endl;
     board.displayAllBugs();
 
-    // STEP COMPLETE
     cout << "\n--- Simulation Step Complete ---" << endl;
 
-    // NEW: show menu (no logic yet, just display)
-    displayMenu();
+    // NEW: menu loop
+    int choice;
+
+    do {
+        displayMenu();
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Initialize selected" << endl;
+                break;
+            case 2:
+                cout << "Display bugs selected" << endl;
+                break;
+            case 3:
+                cout << "Find bug selected" << endl;
+                break;
+            case 4:
+                cout << "Tap board selected" << endl;
+                break;
+            case 5:
+                cout << "Life history selected" << endl;
+                break;
+            case 6:
+                cout << "Display cells selected" << endl;
+                break;
+            case 7:
+                cout << "Run simulation selected" << endl;
+                break;
+            case 8:
+                cout << "Exiting..." << endl;
+                break;
+            default:
+                cout << "Invalid choice" << endl;
+        }
+
+    } while (choice != 8);
 
     return 0;
 }
