@@ -17,8 +17,10 @@ public:
     void fightBugs();
     void findBug(int id);
 
-    // NEW
     void displayLifeHistory() const;
+
+    // NEW
+    void displayAllCells() const;
 
     ~Board();
 };

@@ -110,3 +110,28 @@ Board::~Board() {
         delete bug;
     }
 }
+// Display all cells and bugs in each
+void Board::displayAllCells() const {
+
+    for (int y = 0; y < 10; y++) {
+        for (int x = 0; x < 10; x++) {
+
+            std::cout << "(" << x << "," << y << "): ";
+
+            bool found = false;
+
+            for (auto bug : bugs) {
+                if (bug->isAlive() && bug->getPosition() == std::make_pair(x, y)) {
+                    std::cout << "Bug " << bug->getId() << " ";
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                std::cout << "empty";
+            }
+
+            std::cout << std::endl;
+        }
+    }
+}

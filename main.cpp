@@ -57,6 +57,12 @@ int main() {
                 board.displayLifeHistory();
                 break;
 
+            case 6:
+                cout << "\n--- All Cells ---" << endl;
+                board.displayAllCells();
+                break;
+
+
             case 8:
                 cout << "Exiting..." << endl;
                 break;
