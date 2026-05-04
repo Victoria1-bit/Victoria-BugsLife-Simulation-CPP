@@ -168,6 +168,29 @@ void Board::runSimulation() {
     std::cout << "\nSimulation stopped after " << tapCount << " taps." << std::endl;
 }
 
+// NEW
+void Board::saveLifeHistoryToFile(const std::string& filename) const {
+
+    std::ofstream outFile(filename);
+
+    if (!outFile) {
+        std::cout << "Error writing to file" << std::endl;
+        return;
+    }
+
+    for (auto bug : bugs) {
+        outFile << "Bug " << bug->getId() << " path: ";
+
+        for (auto pos : bug->getPath()) {
+            outFile << "(" << pos.first << "," << pos.second << ") ";
+        }
+
+        outFile << std::endl;
+    }
+
+    std::cout << "Life history saved to " << filename << std::endl;
+}
+
 Board::~Board() {
     for (auto bug : bugs) {
         delete bug;

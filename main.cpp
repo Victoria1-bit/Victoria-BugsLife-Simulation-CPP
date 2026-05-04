@@ -55,10 +55,10 @@ int main() {
 
             case 5:
                 board.displayLifeHistory();
+                board.saveLifeHistoryToFile("life_history.txt");
                 break;
 
             case 6:
-                cout << "\n--- All Cells ---" << endl;
                 board.displayAllCells();
                 break;
 
@@ -66,10 +66,12 @@ int main() {
                 board.runSimulation();
                 break;
 
-
             case 8:
                 cout << "Exiting..." << endl;
                 break;
+
+            default:
+                cout << "Invalid choice" << endl;
         }
 
     } while (choice != 8);

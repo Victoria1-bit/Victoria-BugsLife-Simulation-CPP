@@ -19,9 +19,10 @@ public:
 
     void displayLifeHistory() const;
     void displayAllCells() const;
+    void runSimulation();
 
     // NEW
-    void runSimulation();
+    void saveLifeHistoryToFile(const std::string& filename) const;
 
     ~Board();
 };
