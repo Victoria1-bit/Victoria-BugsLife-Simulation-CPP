@@ -21,7 +21,6 @@ public:
     void displayAllCells() const;
     void runSimulation();
 
-    // NEW
     void saveLifeHistoryToFile(const std::string& filename) const;
 
     ~Board();

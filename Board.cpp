@@ -9,6 +9,7 @@
 #include <thread>
 #include <chrono>
 #include <utility>
+#include <ctime>
 
 void Board::loadBugsFromFile(const std::string& filename) {
     std::ifstream file(filename);
@@ -168,10 +169,19 @@ void Board::runSimulation() {
     std::cout << "\nSimulation stopped after " << tapCount << " taps." << std::endl;
 }
 
-// NEW
+// UPDATED: timestamped filename
 void Board::saveLifeHistoryToFile(const std::string& filename) const {
 
-    std::ofstream outFile(filename);
+    // get current time
+    std::time_t now = std::time(0);
+    std::tm* ltm = std::localtime(&now);
+
+    char buffer[50];
+    std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", ltm);
+
+    std::string newFilename = "life_history_" + std::string(buffer) + ".txt";
+
+    std::ofstream outFile(newFilename);
 
     if (!outFile) {
         std::cout << "Error writing to file" << std::endl;
@@ -188,7 +198,7 @@ void Board::saveLifeHistoryToFile(const std::string& filename) const {
         outFile << std::endl;
     }
 
-    std::cout << "Life history saved to " << filename << std::endl;
+    std::cout << "Saved to " << newFilename << std::endl;
 }
 
 Board::~Board() {
