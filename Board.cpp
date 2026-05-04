@@ -93,7 +93,6 @@ void Board::findBug(int id) {
             return;
         }
     }
-
     std::cout << "Bug not found." << std::endl;
 }
 
@@ -112,6 +111,7 @@ void Board::displayLifeHistory() const {
 void Board::displayAllCells() const {
     for (int y = 0; y < 10; y++) {
         for (int x = 0; x < 10; x++) {
+
             std::cout << "(" << x << "," << y << "): ";
 
             bool found = false;
@@ -135,7 +135,10 @@ void Board::displayAllCells() const {
 void Board::runSimulation() {
     std::cout << "\n--- Running Simulation ---" << std::endl;
 
-    while (true) {
+    int tapCount = 0;
+
+    while (tapCount < 20) {
+
         int aliveCount = 0;
 
         for (auto bug : bugs) {
@@ -149,6 +152,10 @@ void Board::runSimulation() {
             break;
         }
 
+        tapCount++;
+
+        std::cout << "\nTap number: " << tapCount << std::endl;
+
         turnBugs();
         tapBoard();
         fightBugs();
@@ -157,6 +164,8 @@ void Board::runSimulation() {
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+
+    std::cout << "\nSimulation stopped after " << tapCount << " taps." << std::endl;
 }
 
 Board::~Board() {
