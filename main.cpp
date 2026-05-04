@@ -67,9 +67,21 @@ int main() {
                 board.displayAllBugs();
                 break;
 
-            case 3:
-                cout << "Find bug selected" << endl;
+            case 3: {
+                int id;
+                cout << "Enter Bug ID: ";
+                cin >> id;
+
+                Bug* found = board.findBug(id);
+
+                if (found != nullptr) {
+                    cout << "Bug Found:" << endl;
+                    found->display();
+                } else {
+                    cout << "Bug not found." << endl;
+                }
                 break;
+            }
 
             case 4:
                 cout << "\n--- Tapping Board ---" << endl;
