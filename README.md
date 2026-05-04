@@ -1,4 +1,4 @@
-✅ README.md (FULL FILE)
+
 # A Bug's Life Simulation (C++)
 
 ## 📌 Overview
