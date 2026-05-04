@@ -71,9 +71,7 @@ int main() {
                 int id;
                 cout << "Enter Bug ID: ";
                 cin >> id;
-
-                board.findBug(id); // ✅ FIXED (no pointer)
-
+                board.findBug(id);
                 break;
             }
 
@@ -96,7 +94,8 @@ int main() {
                 break;
 
             case 5:
-                cout << "Life history selected" << endl;
+                cout << "\n--- Life History ---" << endl;
+                board.displayAllBugs(); // TEMP: will upgrade next commit
                 break;
 
             case 6:
