@@ -58,7 +58,7 @@ int main() {
 
             case 1:
                 cout << "\nInitializing Bug Board..." << endl;
-                board.loadBugsFromFile("bugs.txt");  // reloads file
+                board.loadBugsFromFile("bugs.txt");
                 cout << "Board loaded!" << endl;
                 break;
 
@@ -72,7 +72,21 @@ int main() {
                 break;
 
             case 4:
-                cout << "Tap board selected" << endl;
+                cout << "\n--- Tapping Board ---" << endl;
+
+                cout << "Turning bugs..." << endl;
+                board.turnBugs();
+
+                cout << "Moving bugs..." << endl;
+                board.tapBoard();
+
+                cout << "Checking fights..." << endl;
+                board.fightBugs();
+
+                cout << "\nUpdated Bugs:" << endl;
+                board.displayAllBugs();
+
+                cout << "--- Step Complete ---" << endl;
                 break;
 
             case 5:
