@@ -21,8 +21,7 @@ void displayMenu() {
 
 int main() {
 
-    // BETTER RANDOM SEED (Commit 37)
-    srand(static_cast<unsigned>(time(0)));
+    srand(time(0));
 
     Board board;
     board.loadBugsFromFile("bugs.txt");
@@ -34,8 +33,8 @@ int main() {
         cin >> choice;
 
         switch (choice) {
+
             case 1:
-                cout << "\nInitializing Bug Board..." << endl;
                 board.loadBugsFromFile("bugs.txt");
                 break;
 
@@ -79,6 +78,12 @@ int main() {
 
             default:
                 cout << "Invalid choice" << endl;
+        }
+
+        if (choice != 8) {
+            cout << "\nPress Enter to continue...";
+            cin.ignore();
+            cin.get();
         }
 
     } while (choice != 8);
