@@ -47,7 +47,6 @@ int main() {
 
     cout << "\n--- Simulation Step Complete ---" << endl;
 
-    // NEW: menu loop
     int choice;
 
     do {
@@ -59,27 +58,36 @@ int main() {
             case 1:
                 cout << "Initialize selected" << endl;
                 break;
+
             case 2:
-                cout << "Display bugs selected" << endl;
+                cout << "\nAll Bugs:" << endl;
+                board.displayAllBugs();   // REAL FUNCTION CONNECTED
                 break;
+
             case 3:
                 cout << "Find bug selected" << endl;
                 break;
+
             case 4:
                 cout << "Tap board selected" << endl;
                 break;
+
             case 5:
                 cout << "Life history selected" << endl;
                 break;
+
             case 6:
                 cout << "Display cells selected" << endl;
                 break;
+
             case 7:
                 cout << "Run simulation selected" << endl;
                 break;
+
             case 8:
                 cout << "Exiting..." << endl;
                 break;
+
             default:
                 cout << "Invalid choice" << endl;
         }
