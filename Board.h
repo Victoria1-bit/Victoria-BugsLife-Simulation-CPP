@@ -20,8 +20,10 @@ public:
     void displayLifeHistory() const;
     void displayAllCells() const;
     void runSimulation();
-
     void saveLifeHistoryToFile(const std::string& filename) const;
+
+    // NEW
+    void displayWinner() const;
 
     ~Board();
 };
