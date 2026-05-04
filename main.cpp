@@ -72,14 +72,8 @@ int main() {
                 cout << "Enter Bug ID: ";
                 cin >> id;
 
-                Bug* found = board.findBug(id);
+                board.findBug(id); // ✅ FIXED (no pointer)
 
-                if (found != nullptr) {
-                    cout << "Bug Found:" << endl;
-                    found->display();
-                } else {
-                    cout << "Bug not found." << endl;
-                }
                 break;
             }
 
