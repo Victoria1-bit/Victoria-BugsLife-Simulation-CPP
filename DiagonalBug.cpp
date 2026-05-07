@@ -6,13 +6,11 @@ DiagonalBug::DiagonalBug(int id, int x, int y, Direction dir, int health)
         : Bug(id, x, y, dir, health) {
 }
 
-// DiagonalBug moves diagonally by 1 square
 void DiagonalBug::move() {
     if (!alive) {
         return;
     }
 
-    // If it is at an edge, choose a new direction
     while (isWayBlocked()) {
         direction = static_cast<Direction>((rand() % 4) + 1);
     }
@@ -34,7 +32,6 @@ void DiagonalBug::move() {
         position.second--;
     }
 
-    // Keep bug inside the 10x10 board
     if (position.first < 0) position.first = 0;
     if (position.first > 9) position.first = 9;
     if (position.second < 0) position.second = 0;
