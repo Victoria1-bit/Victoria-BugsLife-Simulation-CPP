@@ -216,22 +216,9 @@ void Board::runSimulation() {
     std::cout << "\n--- Running Simulation ---" << std::endl;
 
     int tapCount = 0;
+    const int MAX_TAPS = 20;
 
-    while (tapCount < 20) {
-        int aliveCount = 0;
-
-        for (auto bug : bugs) {
-            if (bug->isAlive()) {
-                aliveCount++;
-            }
-        }
-
-        if (aliveCount <= 1) {
-            std::cout << "\nSimulation Complete!" << std::endl;
-            displayWinner();
-            break;
-        }
-
+    while (true) {
         tapCount++;
 
         std::cout << "\nTap number: " << tapCount << std::endl;
@@ -241,12 +228,47 @@ void Board::runSimulation() {
         fightBugs();
 
         displayAllBugs();
-        displayBugCount();
+
+        int aliveCount = 0;
+        Bug* winner = nullptr;
+
+        for (auto bug : bugs) {
+            if (bug->isAlive()) {
+                aliveCount++;
+                winner = bug;
+            }
+        }
+
+        std::cout << "\nTotal Bugs: " << bugs.size()
+                  << " | Alive: " << aliveCount
+                  << " | Dead: " << bugs.size() - aliveCount
+                  << std::endl;
+
+        if (aliveCount == 1) {
+            std::cout << "\n===== WINNER =====" << std::endl;
+
+            if (winner != nullptr) {
+                winner->display();
+            }
+
+            break;
+        }
+
+        if (tapCount >= MAX_TAPS) {
+            std::cout << "\nSimulation stopped after "
+                      << MAX_TAPS << " taps." << std::endl;
+
+            if (winner != nullptr) {
+                std::cout << "\nCurrent strongest/surviving bug:" << std::endl;
+                winner->display();
+            }
+
+            break;
+        }
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    std::cout << "\nSimulation stopped after " << tapCount << " taps." << std::endl;
     saveLifeHistoryToFile("bugs_life_history");
 }
 
