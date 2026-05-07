@@ -28,6 +28,7 @@ public:
     int getId() const;
     int getHealth() const;
     std::pair<int,int> getPosition() const;
+
     std::list<std::pair<int,int> > getPath() const;
 
     bool isWayBlocked();

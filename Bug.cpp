@@ -28,6 +28,10 @@ std::pair<int,int> Bug::getPosition() const {
     return position;
 }
 
+std::list<std::pair<int,int> > Bug::getPath() const {
+    return path;
+}
+
 void Bug::setDirection(Direction dir) {
     direction = dir;
 }
@@ -48,20 +52,17 @@ bool Bug::isWayBlocked() {
     return false;
 }
 
-// IMPROVED DISPLAY (Commit 38)
 void Bug::display() const {
+    std::string dirText;
 
-    std::string dirStr;
-    switch (direction) {
-        case NORTH: dirStr = "North"; break;
-        case EAST:  dirStr = "East"; break;
-        case SOUTH: dirStr = "South"; break;
-        case WEST:  dirStr = "West"; break;
-    }
+    if (direction == NORTH) dirText = "North";
+    else if (direction == EAST) dirText = "East";
+    else if (direction == SOUTH) dirText = "South";
+    else if (direction == WEST) dirText = "West";
 
     std::cout << "Bug " << id
               << " | Pos: (" << position.first << "," << position.second << ")"
-              << " | Dir: " << dirStr
+              << " | Dir: " << dirText
               << " | HP: " << health
               << " | " << (alive ? "Alive" : "Dead")
               << std::endl;
