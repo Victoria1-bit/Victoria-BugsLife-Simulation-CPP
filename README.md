@@ -1,106 +1,154 @@
-# A Bug's Life Simulation (C++)
+# A Bug’s Life Simulation – C++ CA
 
-## Overview
-This project is a C++ console application that simulates bugs moving on a 10x10 bug board.
+## Project Overview
 
-The project uses object-oriented programming concepts such as:
-- inheritance
-- polymorphism
-- abstract classes
-- vectors of base-class pointers
-- file input and output
-- STL containers
+This project is a console-based simulation developed in C++ that models different types of bugs moving around a 10x10 game board.
+
+The application demonstrates object-oriented programming principles including inheritance, polymorphism, abstraction, encapsulation, and dynamic memory management. Bugs are loaded from a text file and interact within the simulation through movement and combat mechanics.
 
 ---
 
-## Bug Types
+# Project Objectives
 
-### Crawler
-A Crawler moves one square at a time in its current direction.
+The purpose of this project is to:
 
-### Hopper
-A Hopper moves multiple squares at a time using its hop length.
-
-### DiagonalBug
-A DiagonalBug is the extra bug type added to the project.  
-It moves diagonally across the board and still uses the shared `Bug` base class.
-
----
-
-## Main Classes
-
-### Bug
-Abstract base class.
-
-Stores:
-- id
-- position
-- direction
-- health
-- alive status
-- path history
-
-### Crawler
-Derived from `Bug`.
-
-Overrides:
-- `move()`
-- `display()`
-
-### Hopper
-Derived from `Bug`.
-
-Overrides:
-- `move()`
-- `display()`
-
-### DiagonalBug
-Derived from `Bug`.
-
-Overrides:
-- `move()`
-- `display()`
-
-### Board
-Controls the simulation.
-
-Responsibilities:
-- load bugs from file
-- display all bugs
-- find a bug by ID
-- tap the board
-- run fights
-- display life history
-- display all cells
-- run simulation
-- save life history to file
+- Simulate bug movement on a board
+- Implement multiple derived bug classes
+- Store bugs polymorphically using base-class pointers
+- Track bug movement history
+- Simulate bug fights and eliminations
+- Provide a menu-driven user interface
+- Read and write data using files
 
 ---
 
-## Input File Format
+# Bug Types
+
+## 1. Crawler
+
+Crawler bugs move one square at a time in their current direction.
+
+### Features
+- Moves one step
+- Changes direction randomly
+- Stores movement history
+
+---
+
+## 2. Hopper
+
+Hopper bugs move multiple squares depending on their hop length.
+
+### Features
+- Jumps several spaces per move
+- Uses hop length value from file
+- Stores movement history
+
+---
+
+## 3. DiagonalBug
+
+DiagonalBug is the additional bug type added to extend the project functionality.
+
+### Features
+- Moves diagonally across the board
+- Inherits from the Bug base class
+- Uses polymorphic movement
+
+---
+
+# Main Classes
+
+## Bug (Abstract Base Class)
+
+The Bug class stores all shared bug information.
+
+### Data Stored
+- Bug ID
+- Position
+- Direction
+- Health
+- Alive status
+- Path history
+
+### Main Functions
+- `move()`
+- `display()`
+- `getId()`
+- `getPosition()`
+- `getHealth()`
+- `getPath()`
+- `kill()`
+- `setDirection()`
+
+---
+
+## Board Class
+
+The Board class manages the simulation.
+
+### Responsibilities
+- Load bugs from file
+- Display all bugs
+- Move bugs
+- Run simulations
+- Detect bug fights
+- Display board cells
+- Save life history to file
+
+---
+
+# STL Containers Used
+
+## vector<Bug*>
+
+Used to store all bug objects polymorphically.
+
+### Reason
+Allows different derived bug types to be stored together while still using overridden functions.
+
+---
+
+## list<pair<int,int>>
+
+Used to store each bug’s movement history.
+
+### Reason
+Efficient insertion of movement positions throughout the simulation.
+
+---
+
+# File Input
 
 The program reads bug data from `bugs.txt`.
 
-### Crawler
+## Example Data
 
 ```txt
 C;101;0;0;4;10
-Hopper
 H;102;9;0;1;8;2
-DiagonalBug
 D;107;4;4;1;20
-
-Format:
-
-Type;ID;X;Y;Direction;Health;HopLength(optional)
-
-Direction values:
-
-1 = North
-2 = East
-3 = South
-4 = West
-Menu Options
+File Format
+Type;ID;X;Y;Direction;Health;HopLength
+Direction Values
+Value	Direction
+1	North
+2	East
+3	South
+4	West
+Program Features
+File loading
+Menu-driven interface
+Bug movement simulation
+Random direction changes
+Bug combat system
+Life history tracking
+Board display system
+Automatic simulation mode
+Save life history to file
+Winner detection
+Additional custom bug type
+Menu System
 1. Initialize Bug Board
 2. Display all Bugs
 3. Find a Bug
@@ -109,30 +157,31 @@ Menu Options
 6. Display all Cells
 7. Run Simulation
 8. Exit
-Features Implemented
-Load bug data from file
-Display all bugs
-Find a bug by ID
-Move bugs using polymorphism
-Tap board movement
-Fight system
-Track path history
-Display life history
-Display all cells on the 10x10 grid
-Run automatic simulation
-Save life history on exit
-Added extra bug type: DiagonalBug
-Data Structures Used
-vector<Bug*> stores all bugs polymorphically
-list<pair<int,int>> stores each bug's path history
-pair<int,int> stores grid positions
-How to Run
-Open the project in CLion
-Build the project
-Run the executable
-Use the menu options to control the simulation
+Simulation Logic
+
+During simulation:
+
+Bugs change direction randomly
+Bugs move across the board
+Bugs that land on the same position fight
+Bugs with lower health are removed
+Simulation continues until one bug remains or max steps reached
+Output Files
+life_history.txt
+
+Stores the movement history of every bug during execution.
+
+Generated automatically when the program exits.
+
+Technologies Used
+C++
+CLion
+CMake
+STL Containers
+Object-Oriented Programming
 Author
 
 Victoria
+
 C++ Continuous Assessment
-A Bug's Life Simulation
+A Bug’s Life Simulation
