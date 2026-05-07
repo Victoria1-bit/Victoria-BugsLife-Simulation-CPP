@@ -12,6 +12,7 @@ private:
 public:
     void loadBugsFromFile(const std::string& filename);
     void displayAllBugs() const;
+    void displayBugCount() const;
     void tapBoard();
     void turnBugs();
     void fightBugs();
@@ -21,11 +22,7 @@ public:
     void displayAllCells() const;
     void runSimulation();
     void saveLifeHistoryToFile(const std::string& filename) const;
-
     void displayWinner() const;
-
-
-    void displayBugCount() const;
 
     ~Board();
 };

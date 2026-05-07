@@ -61,7 +61,7 @@ int main() {
 
             case 5:
                 board.displayLifeHistory();
-                board.saveLifeHistoryToFile("life_history.txt");
+                board.saveLifeHistoryToFile("bugs_life_history");
                 break;
 
             case 6:
@@ -74,7 +74,7 @@ int main() {
 
             case 8:
                 cout << "Saving life history before exit..." << endl;
-                board.saveLifeHistoryToFile("life_history.txt");
+                board.saveLifeHistoryToFile("bugs_life_history");
                 cout << "Exiting..." << endl;
                 break;
 

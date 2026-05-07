@@ -36,8 +36,18 @@ void Bug::setDirection(Direction dir) {
     direction = dir;
 }
 
+void Bug::takeDamage(int damage) {
+    health = health - damage;
+
+    if (health <= 0) {
+        health = 0;
+        alive = false;
+    }
+}
+
 void Bug::kill() {
     alive = false;
+    health = 0;
 }
 
 bool Bug::isWayBlocked() {
