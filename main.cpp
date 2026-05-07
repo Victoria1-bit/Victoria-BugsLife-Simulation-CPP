@@ -73,6 +73,8 @@ int main() {
                 break;
 
             case 8:
+                cout << "Saving life history before exit..." << endl;
+                board.saveLifeHistoryToFile("life_history.txt");
                 cout << "Exiting..." << endl;
                 break;
 
